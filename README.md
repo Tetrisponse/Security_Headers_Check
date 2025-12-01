@@ -1,6 +1,6 @@
 # **Security_Headers_Check**
 
-A robust, dependency-free Python tool for auditing web security headers and cookie attributes. Designed for SecOps professionals to validate security postures across internal (VPN/Intranet) and external environments.
+A robust, dependency-free Python tool for auditing web security headers, referrer policies, and security-related cookie attributes. Designed for cybersecurity professionals to validate security postures across internal (VPN/Intranet) and external environments.
 
 ## Features
 
