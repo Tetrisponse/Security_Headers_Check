@@ -57,6 +57,7 @@ python3 security_headers_check.py app.example.com
 
 
 **Check a specific sensitive path**:
+
 *Useful for verifying strict CSPs on admin pages or checking specific cookies on login pages.*
 ```
 python3 security_headers_check.py app.example.com/admin/login
