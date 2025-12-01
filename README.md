@@ -74,11 +74,11 @@ The script enforces the following criteria. A header is only marked as PASS if i
 
 If `Set-Cookie` headers are detected, each cookie is individually analyzed for:
 
-- **`Secure`**: Ensures cookie is only sent over encrypted HTTPS connections.
+- `Secure`: Ensures cookie is only sent over encrypted HTTPS connections.
 
-- **`HttpOnly`**: Prevents JavaScript from accessing the cookie (Critical XSS mitigation).
+- `HttpOnly`: Prevents JavaScript from accessing the cookie (Critical XSS mitigation).
 
-- **`SameSite`**: Mitigates CSRF attacks (Expects `Lax` or `Strict`).
+- `SameSite`: Mitigates CSRF attacks (Expects `Lax` or `Strict`).
 
 ## Interpreting Results
 
