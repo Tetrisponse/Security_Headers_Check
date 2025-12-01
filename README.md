@@ -40,7 +40,7 @@ python3 security_headers_check.py example.com -o scan_results.txt
 
 Also works for multiple domains:
 ```
-python3 security_headers_check.py example_one.com example_two.com -o full_audit.txt
+python3 security_headers_check.py example-one.com example-two.com -o full_audit.txt
 ```
 
 ## Examples
