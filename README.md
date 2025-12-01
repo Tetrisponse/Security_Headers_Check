@@ -76,7 +76,7 @@ If `Set-Cookie` headers are detected, each cookie is individually analyzed for:
 
 - **[✓] Green**: Header is present and configured securely.
 
-- **[✗] Red**: Header is missing **OR** configured insecurely (e.g., HSTS `max-age=0` or `X-Frame-Options: ALLOW-FROM`).
+- <span style="color:red">**[✗] Red**</span>: Header is missing **OR** configured insecurely (e.g., HSTS `max-age=0` or `X-Frame-Options: ALLOW-FROM`).
 
 - **[!] Yellow**: Header is present but contains potentially weak directives (e.g., CSP `unsafe-inline warning`).
 
