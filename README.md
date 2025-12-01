@@ -53,9 +53,9 @@ python3 security_headers_check.py app.example.com/admin/login
 The script enforces the following criteria. A header is only marked as PASS if it meets the specific security requirements below:
 
 | Header | Pass Criteria |
-|---:|---|
-| `Strict-Transport-Security` | Must have: `max-age` >= 31536000 (1 year) AND include `includeSubDomains`. |
-| `Content-Security-Policy` | Checked for presence. Warns if it contains: `unsafe-inline`, `unsafe-eval`, or `default-src *`. |
+|----|----|
+| `Strict-Transport-Security` | Must have: `max-age` >= 31536000 (1 year) AND include `includeSubDomains`.|
+| `Content-Security-Policy` | Checked for presence. Warns if it contains: `unsafe-inline`, `unsafe-eval`, or `default-src *`.|
 | `X-Frame-Options` | Must be `DENY` or `SAMEORIGIN`. Deprecated values like `ALLOW-FROM` trigger a failure. |
 | `X-Content-Type-Options` | Must be exactly `nosniff`. |
 | `Referrer-Policy` | Must be one of the safe values: `strict-origin`, `strict-origin-when-cross-origin`, `no-referrer`, `same-origin`. |
