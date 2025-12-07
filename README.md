@@ -97,4 +97,6 @@ If `Set-Cookie` headers are detected, each cookie is individually analyzed for:
 
 - **[ℹ] Blue**: Informational messages (e.g., "Redirected to login page" or "No cookies found").
 
+## Contributors
 
+- [MagVeTs](https://github.com/MagVeTs)
