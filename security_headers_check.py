@@ -83,8 +83,11 @@ def validate_header_value(header_key, value):
 
     # 3. X-Frame-Options
     if header_key == 'x-frame-options':
-        if value.upper() in ['DENY', 'SAMEORIGIN']:
+        value_upper = value.upper()
+        if value_upper in ['DENY', 'SAMEORIGIN']:
             return True, f"Value: {value}"
+        if 'ALLOW-FROM' in value_upper:
+            return False, f"Value: {value} (Deprecated ALLOW-FROM is insecure)"
         return False, f"Value: {value} (Insecure: Should be DENY or SAMEORIGIN)"
 
     # 4. X-Permitted-Cross-Domain-Policies
@@ -130,7 +133,6 @@ def validate_header_value(header_key, value):
         return True, f"Value: {value}"
 
     return True, f"Found"
-
 
 def check_headers(url):
     """Checks the target headers for a specific URL."""
@@ -212,14 +214,34 @@ def check_headers(url):
             for cookie in cookies:
                 name = cookie.split('=')[0]
                 flags = []
-                if 'secure' not in cookie.lower(): flags.append(f"Missing Secure")
-                if 'httponly' not in cookie.lower(): flags.append(f"Missing HttpOnly")
-                if 'samesite' not in cookie.lower(): flags.append(f"Missing SameSite")
+                if 'secure' not in cookie.lower(): 
+                    flags.append("Missing Secure")
+                if 'httponly' not in cookie.lower(): 
+                    flags.append("Missing HttpOnly")
                 
+                # Improved SameSite checking
+                cookie_l = cookie.lower()
+                if 'samesite=' not in cookie_l:
+                    flags.append("Missing SameSite")
+                else:
+                    # Extract value after samesite=
+                    samesite_value = None
+                    for part in cookie_l.split(';'):
+                        part = part.strip()
+                        if part.startswith('samesite='):
+                            samesite_value = part.split('=', 1)[1].strip()
+                            break
+                    if samesite_value is None:
+                        flags.append("Missing SameSite")
+                    elif samesite_value not in ('lax', 'strict', 'none'):
+                        flags.append("Invalid SameSite value")
+                    elif samesite_value == 'none' and 'secure' not in cookie_l:
+                        flags.append("SameSite=None without Secure")
+                    # else: Lax/Strict/None-with-Secure are all considered present
+
                 if not flags:
                     print_log(f"  [{GREEN}✓{RESET}] {name}: Secure, HttpOnly, SameSite present")
                 else:
-                    # Note: We color the X red but keep the text simpler for readability
                     print_log(f"  [{RED}✗{RESET}] {name}: {RED}{', '.join(flags)}{RESET}")
                     all_passed = False
         else:
