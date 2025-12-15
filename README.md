@@ -71,11 +71,15 @@ The script enforces the following criteria. A header is only marked as PASS if i
 |----|----|
 | `Strict-Transport-Security` | Must have: `max-age` >= 31536000 (1 year) AND include `includeSubDomains`.|
 | `Content-Security-Policy` | Checked for presence. Warns if it contains: `unsafe-inline`, `unsafe-eval`, or `default-src *`.|
-| `X-Frame-Options` | Must be `DENY` or `SAMEORIGIN`. Deprecated values like `ALLOW-FROM` trigger a failure. |
+| `X-Frame-Options` | Must be `DENY` or `SAMEORIGIN`. `ALLOW-FROM` is considered insecure (deprecated). |
 | `X-Content-Type-Options` | Must be exactly `nosniff`. |
-| `Referrer-Policy` | Must be one of the safe values: `strict-origin`, `strict-origin-when-cross-origin`, `no-referrer`, `same-origin`. |
+| `Referrer-Policy` | Must be one of: `no-referrer`, `same-origin`, `strict-origin`, `strict-origin-when-cross-origin`, `origin`, `origin-when-cross-origin`. |
 | `Permissions-Policy` | Checked for presence. |
 | `Cross-Origin-*-Policy` | Headers like `Cross-Origin-Opener-Policy` must NOT be `unsafe-none`. |
+| Cookies | If Set-Cookie headers are detected, each cookie is individually analyzed for:
+- `Secure`: Cookie is only sent over HTTPS.
+- `HttpOnly`: Cookie is not accessible via JavaScript.
+- `SameSite`: Must be present and be `Lax`, `Strict`, or `None` (with `Secure`). |
 
 **Cookies**
 
