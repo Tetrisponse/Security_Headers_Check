@@ -76,10 +76,7 @@ The script enforces the following criteria. A header is only marked as PASS if i
 | `Referrer-Policy` | Must be one of: `no-referrer`, `same-origin`, `strict-origin`, `strict-origin-when-cross-origin`, `origin`, `origin-when-cross-origin`. |
 | `Permissions-Policy` | Checked for presence. |
 | `Cross-Origin-*-Policy` | Headers like `Cross-Origin-Opener-Policy` must NOT be `unsafe-none`. |
-| Cookies | If Set-Cookie headers are detected, each cookie is individually analyzed for:
-- `Secure`: Cookie is only sent over HTTPS.
-- `HttpOnly`: Cookie is not accessible via JavaScript.
-- `SameSite`: Must be present and be `Lax`, `Strict`, or `None` (with `Secure`). |
+| Cookies | If Set-Cookie headers are detected, each cookie is individually analyzed for: `Secure`: Cookie is only sent over HTTPS. `HttpOnly`: Cookie is not accessible via JavaScript. `SameSite`: Must be present and be `Lax`, `Strict`, or `None` (with `Secure`). |
 
 **Cookies**
 
